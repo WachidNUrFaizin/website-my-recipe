@@ -3,16 +3,19 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 
-afterEach(() => {
-  jest.clearAllTimers();
-  jest.clearAllMocks();
-});
-
 test('renders App component with NavBar, image banner, and Footer', () => {
   render(<App />);
 
-  // image banner is rendered
+
+  const navBar = screen.getByTestId('my-recipe');
+  expect(navBar).toBeInTheDocument();
+
+
   const banner = screen.getByTestId('image-banner');
   expect(banner).toBeInTheDocument();
-  expect(banner).toHaveProperty('src', 'change-to-link-url');
+  expect(banner).toHaveAttribute('src', 'https://www.instacart.com/company/wp-content/uploads/2022/11/cooking-statistics-hero.jpg');
+
+
+  const footer = screen.getByTestId('footer-text');
+  expect(footer).toBeInTheDocument();
 });
